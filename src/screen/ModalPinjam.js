@@ -12,8 +12,7 @@ class Modal extends Component {
     pinjam = async (e) => {
         e.preventDefault()
         await this.props.dispatch(postPinjam({
-            card_id: document.getElementById('card_id').value,
-            name: document.getElementById('name').value,
+            id_user: localStorage.id,
             id_book: this.props.match.params.bookid,
         }
         ))
@@ -33,7 +32,7 @@ class Modal extends Component {
                                     <p>Card ID</p>
                                 </div>
                                 <div className="input">
-                                    <input type="text" placeholder="Card ID ..." id={'card_id'} name="card_id" required/>
+                                    <input type="text" placeholder="Card ID ..." id={'card_id'} name="card_id" value={localStorage.card_id} disabled required/>
                                 </div>
                             </div>
                             <div className="inputGroup">
@@ -41,7 +40,7 @@ class Modal extends Component {
                                     <p>Nama Peminjam</p>
                                 </div>
                                 <div className="input">
-                                    <input type="text" placeholder="Name ..." id={'name'} name="name" required/>
+                                    <input type="text" placeholder="Name ..." id={'name'} value={localStorage.fullname} disabled name="name" required/>
                                 </div>
                             </div>
                             <div className="inputGroup">

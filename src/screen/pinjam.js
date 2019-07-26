@@ -19,7 +19,11 @@ class pinjam extends Component {
         }
     }
     componentDidMount = async () => {
-        await this.props.dispatch(getPinjams())
+        if(localStorage.role === "Librarian"){
+            await this.props.dispatch(getPinjams())            
+        }else{
+            await this.props.dispatch(getPinjams(localStorage.token,localStorage.id))            
+        }
         this.setState({
             pinjam: this.props.pinjam
         })

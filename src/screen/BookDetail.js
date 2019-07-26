@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getBook } from '../publics/redux/action/book'
 import { deleteBook } from '../publics/redux/action/book'
-
+import ModalAlert from './ModalAlert'
 function convert(date) {
   let data = Date.parse(date)
   let newDate = new Date(data)
@@ -17,8 +17,12 @@ class BookDetail extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      book: []
+      book: [],
+      modal: ""
     }
+  }
+  setModal = () => {
+    this.setState({ modal: "" })
   }
   componentDidMount = async () => {
     console.log(this.props)
@@ -28,20 +32,29 @@ class BookDetail extends Component {
       book: this.props.book
     })
   }
-  deleteData = ()=>{
+  deleteData = () => {
     this.props.dispatch(deleteBook(this.props.match.params.bookid))
     this.props.showModalDelete()
+  }
+  pinjam = () => {
+    if (localStorage.id) {
+      this.props.showModalPinjam()
+    } else {
+      const modal = <ModalAlert show={true} pesan={"Login Dulu Dong"} error={true} link={"/login"} setModal={this.setModal} />
+      this.setState({ modal: modal })
+    }
   }
   render() {
     const book = this.state.book.bookEdit
     console.log(book)
     return (
       <div className="book-detail">
+        {this.state.modal}
         <div>
           <ul>
             <li><Link to="/" className="back">&lArr;</Link></li>
-            {this.props.user.userList ? this.props.user.userList.role === "Librarian" ? <li className="button" onClick={this.props.showModal}>Edit</li>:"":""}
-            {this.props.user.userList ? this.props.user.userList.role === "Librarian" ? <li className="button" onClick={this.deleteData}>Delete</li>:"":""}
+            {localStorage.role === "Librarian" ? <li className="button" onClick={this.props.showModal}>Edit</li> : ""}
+            {localStorage.role === "Librarian" ? <li className="button" onClick={this.deleteData}>Delete</li> : ""}
           </ul>
           <div className={'imageHeader'}>
             <img className={'imageHeader'} src={book ? book.result.image_url : ""} alt={book ? book.result.title : ""} />
@@ -49,7 +62,7 @@ class BookDetail extends Component {
         </div>
         <div className="content">
           <img className={'imageBook'} src={book ? book.result.image_url : ""} alt={book ? book.result.title : ""} />
-          <button className={"btn-pinjam"} onClick={this.props.showModalPinjam}>Pinjam </button>
+          <button className={"btn-pinjam"} onClick={this.pinjam}>Pinjam </button>
           <p className="title">{book ? book.result.title : ""}</p>
           <p className="date">{book ? convert(book.result.updated_at) : ""}</p>
           <p className="category">Category : {book ? book.result.category : ""}</p>
@@ -64,7 +77,7 @@ class BookDetail extends Component {
 const mapStateToProps = (state) => {
   return {
     book: state.book,
-    user:state.user
+    user: state.user
   }
 }
 

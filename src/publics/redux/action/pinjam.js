@@ -3,7 +3,7 @@ import axios from 'axios'
 export const getPinjams = (token,idUser) =>{
     return{
         type:"GET_PINJAMS",
-        payload:axios.get(`http://192.168.6.121:3300/pinjam/`,null,{
+        payload:axios.get(`http://192.168.6.121:3300/pinjam/`,idUser,{
             headers:{
                 "x-access-token":`bearer ${token}`,
                 "authorization":"Allow",
@@ -13,10 +13,16 @@ export const getPinjams = (token,idUser) =>{
     }
 }
 
-export const getPinjam = (id) =>{
+export const getPinjam = (id,token,idUser) =>{
     return{
         type:"GET_PINJAM",
-        payload:axios.get(`http://192.168.6.121:3300/pinjam/${id}`)
+        payload:axios.get(`http://192.168.6.121:3300/pinjam/${id}`,null,{
+            headers:{
+                "x-access-token":`bearer ${token}`,
+                "authorization":"Allow",
+                "x-control-user": idUser
+            }
+        })
     }
 }
 

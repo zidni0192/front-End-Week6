@@ -9,7 +9,7 @@ class Modal extends Component {
         }
     }
     componentDidMount = async () => {
-        await this.props.dispatch(getPinjam(this.props.id_pinjam))
+        await this.props.dispatch(getPinjam(this.props.id_pinjam,localStorage.token,localStorage.id))
         this.setState({ pinjam: this.props.pinjam.pinjamList.result })
         
         let dateExpired = new Date(Date.parse(this.state.pinjam[0].expired_at))
@@ -21,13 +21,13 @@ class Modal extends Component {
             const diffDays = diffTime / (1000 * 60 * 60 * 24)
             denda = diffDays * 2000
         }
-        await this.props.dispatch(patchPinjam({denda:denda}, this.props.id_pinjam))
-        await this.props.dispatch(getPinjam(this.props.id_pinjam))
+        await this.props.dispatch(patchPinjam({denda:denda}, this.props.id_pinjam,localStorage.token,localStorage.id))
+        await this.props.dispatch(getPinjam(this.props.id_pinjam,localStorage.token,localStorage.id))
         this.setState({ pinjam: this.props.pinjam.pinjamList.result })
     }
     kembalikan = () =>{
         console.log(this.state.pinjam[0].id_book)
-        this.props.dispatch(patchPinjam({status:false,id_book:this.state.pinjam[0].id_book,returned_at:new Date()}, this.props.id_pinjam))
+        this.props.dispatch(patchPinjam({status:false,id_book:this.state.pinjam[0].id_book,returned_at:new Date()}, this.props.id_pinjam,localStorage.token,localStorage.id))
         this.props.hideModalKembalikan()
     }
     render() {

@@ -4,9 +4,9 @@ export const getUsers = (token,idUser) => {
         type: "GET_USERS",
         payload: axios.get(`http://192.168.6.121:3300/user`,null,{
             headers:{
-                "x-access-token":`bearer ${token}`,
+                "x-access-token":`bearer ${localStorage.token}`,
                 "authorization":"Allow",
-                "x-control-user": idUser
+                "x-control-user": localStorage.id
             }
         })
     }
@@ -39,9 +39,9 @@ export const getToken = (token,idUser) =>{
         type: "GET_TOKEN",
         payload:axios.post(`http://192.168.6.121:3300/user/getToken`,null,{
             headers:{
-                "x-access-token":`bearer ${token}`,
+                "x-access-token":`bearer ${localStorage.token}`,
                 "authorization":"Allow",
-                "x-control-user": idUser
+                "x-control-user": localStorage.id
             }
         })
     }

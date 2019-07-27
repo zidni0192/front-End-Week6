@@ -32,7 +32,7 @@ class Modal extends Component {
                                     <p>Card ID</p>
                                 </div>
                                 <div className="input">
-                                    <input type="text" placeholder="Card ID ..." id={'card_id'} name="card_id" value={localStorage.card_id} disabled required/>
+                                    <input type="text" placeholder="Card ID ..." id={'card_id'} name="card_id" value={localStorage.no_ktp} disabled required/>
                                 </div>
                             </div>
                             <div className="inputGroup">

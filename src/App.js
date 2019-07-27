@@ -17,6 +17,7 @@ import { Provider } from 'react-redux'
 import store from './publics/redux/store'
 import Login from './screen/login'
 import Register from './screen/register'
+import Users from './screen/users';
 
 class App extends Component {
   constructor() {
@@ -74,6 +75,10 @@ class App extends Component {
               <Route path={'/login'}>
                 <Route render={() => <Nav />} />
                 <Route render={() => <Login />} />
+              </Route>
+              <Route path={'/users'}>
+                <Route render={() => <Nav />} />
+                <Route render={() => <Users />} />
               </Route>
               <Route path={'/register'}>
                 <Route render={() => <Nav />} />

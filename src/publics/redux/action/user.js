@@ -29,6 +29,7 @@ export const register = (data) => {
         payload:axios.post(`http://192.168.6.121:3300/user/register`,data,{
             headers:{
                 "authorization":"Allow",
+                
             }
         })
     }

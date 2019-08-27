@@ -27,7 +27,7 @@ export const postBook = (data) => {
         type:"POST_BOOK",
         payload:axios.post('http://192.168.6.121:3300/books',data,{
             headers:{
-                "authorization":"Allow"
+                "authorization":"Allow",
             }
         }),
     }

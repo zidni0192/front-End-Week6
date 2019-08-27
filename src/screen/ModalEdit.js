@@ -23,8 +23,10 @@ class Modal extends Component {
     changeHandle = (e) => {
         const name = e.currentTarget.name
         const val = e.currentTarget.value
+        // eslint-disable-next-line
         this.state.book[name] = val
         const category = this.state.category.categoryList.result.find(item => Number(item.categoryid) === Number(this.state.book.category_id))
+        // eslint-disable-next-line
         this.state.book['category'] = category.name
         this.setState((state) => ({ book: state.book }))
     }
@@ -90,7 +92,7 @@ class Modal extends Component {
                                     <p>Location</p>
                                 </div>
                                 <div className="input">
-                                    <input type="text" placeholder="Location ..." id={'location'} name="location" value={this.state.book.location} onChange={this.changeHandle} onChange={this.changeHandle} required />
+                                    <input type="text" placeholder="Location ..." id={'location'} name="location" value={this.state.book.location} onChange={this.changeHandle} required />
                                 </div>
                             </div>
                             <div className="inputGroup">

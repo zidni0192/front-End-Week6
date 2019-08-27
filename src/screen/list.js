@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getBooks } from '../publics/redux/action/book'
 
 function text(text) {
     if (text.length > 20) {
@@ -16,24 +15,20 @@ class List extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            book: []
+            book: this.props.search
         }
     }
-    componentDidMount = async () => {
-        await this.props.dispatch(getBooks(""))
-        this.setState({ book: this.props.book })
-    }
     render() {
-        const book = this.state.book.bookList
-        console.log(this.props)
-        console.log()
+        const book = this.props.search
+        console.log(book)
         return (
+            !book.isFulfilled ? <div style={{marginTop:300,textAlign:"center"}}>Loading</div> :
             <div className="list">
-                {localStorage.id ? localStorage.role === "User"  ? "": <button className="add" onClick={this.props.showModal}>{"ADD"}</button>:<button className="add" onClick={this.props.showModal}>{"DONASI"}</button>}
+                {localStorage.id ? localStorage.role === "User" ? "" : <button className="add" onClick={this.props.showModal}>{"ADD"}</button> : <button className="add" onClick={this.props.showModal}>{"DONASI"}</button>}
                 <div className="list-item">
                     {
-                        !book ? "" : book.result.map(
-                            (item, index) => {
+                        !book.bookList ? "" : !book.bookList.result.length > 0 ? "" : book.bookList.result.map(
+                            (item) => {
                                 const tersedia =
                                     <Link to={`/${item.bookid}`}>
                                         <div className="item" id="items" bookid={item.bookid}>
@@ -76,7 +71,7 @@ class List extends Component {
 const mapStateToProps = (state) => {
     return {
         book: state.book,
-        user:state.user
+        user: state.user
     }
 }
 

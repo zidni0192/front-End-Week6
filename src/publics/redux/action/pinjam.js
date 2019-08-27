@@ -8,7 +8,7 @@ console.log(idUser)
             headers:{
                 "x-access-token":`bearer ${localStorage.token}`,
                 "authorization":"Allow",
-                "x-control-user": localStorage.id
+                "x-control-user": localStorage.id,
             }
         })
     }
@@ -30,7 +30,7 @@ export const getPinjam = (id,token,idUser) =>{
 export const postPinjam = (data,token,idUser) => {
     return{
         type:"POST_PINJAM",
-        payload:axios.post('http://192.168.6.121:3300/pinjam',data,{
+        payload:axios.post('http://192.168.6.121:3300/pinjam/post',{...data,role:localStorage.role},{
             headers:{
                 "x-access-token":`bearer ${localStorage.token}`,
                 "authorization":"Allow",

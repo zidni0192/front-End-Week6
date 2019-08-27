@@ -19,15 +19,15 @@ class Modal extends Component {
     }
     add = (e) => {
         e.preventDefault()
-        this.props.dispatch(postBook({
-            writer: document.getElementById('writer').value,
-            description: document.getElementById('description').value,
-            title: document.getElementById('title').value,
-            image_url: document.getElementById('image_url').value,
-            location: document.getElementById('location').value,
-            category_id: document.getElementById('category').value,
-        }
-        ))
+        const formdata = new FormData()
+        formdata.append('writer', document.getElementById('writer').value)
+        formdata.append('description', document.getElementById('description').value)
+        formdata.append('title', document.getElementById('title').value)
+        formdata.append('image',document.getElementById('image_url').files[0])
+        formdata.append('location' ,document.getElementById('location').value)
+        formdata.append('category_id', document.getElementById('category').value)
+        this.props.dispatch(postBook(formdata))
+        console.log(document.getElementById('image_url').files[0])
         document.getElementById('writer').value = ""
         document.getElementById('description').value = ""
         document.getElementById('title').value = ""
@@ -43,13 +43,13 @@ class Modal extends Component {
                     <button onClick={this.props.handleClose} className={'close'}>X</button>
                     <p>{localStorage.id ? `Add Data` : `Donasi`}</p>
                     <div style={{ marginBottom: 100 }}>
-                        <form onSubmit={this.add}>
+                        <form onSubmit={this.add} encType={'multipart/form-data'}>
                             <div className="inputGroup">
                                 <div className="label">
                                     <p>Url Image</p>
                                 </div>
                                 <div className="input">
-                                    <input type="text" placeholder="Url Image ..." id={'image_url'} name="image_url" required />
+                                    <input type="file" placeholder="Url Image ..." id={'image_url'} name="image_url" required />
                                 </div>
                             </div>
                             <div className="inputGroup">

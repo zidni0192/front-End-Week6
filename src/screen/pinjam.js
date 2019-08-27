@@ -63,6 +63,7 @@ class pinjam extends Component {
                     </div>
                 </div>
                 {!pinjam ? "" : pinjam.result.map(item => {
+                    console.log(item)
                     return (
                         <div style={{ clear: "both" }}>
                             <div style={{ width: "20%", float: "left", textAlign: "center", borderBottom: "1px solid black", display: "table", height: "70px", borderLeft: "1px solid black" }}>
@@ -78,7 +79,7 @@ class pinjam extends Component {
                                 <p style={{ display: "table-cell", verticalAlign: "middle" }}>{convert(item.expired_at)}</p>
                             </div>
                             {localStorage.id && localStorage.role === "Librarian" ? <div style={{ width: "19%", float: "left", textAlign: "center", borderBottom: "1px solid black", height: "70px", borderRight: "1px solid black", display: "table" }}>
-                                <button id={item.id} style={{ margin: "15px", height: "40px", width: "80%", borderRadius: "10px", border: "1px solid black", background: "white", cursor: "pointer", outline: "none" }} onClick={this.showModal}>Kembalikan</button>
+                                {item.returned_at ? <p style={{ display: "table-cell", verticalAlign: "middle" }}>Dikembalikan</p> :<button id={item.id} style={{ margin: "15px", height: "40px", width: "80%", borderRadius: "10px", border: "1px solid black", background: "white", cursor: "pointer", outline: "none" }} onClick={this.showModal}>Kembalikan</button>}
                             </div>
                                 : <div style={{ width: "19%", float: "left", textAlign: "center", borderBottom: "1px solid black",borderRight: "1px solid black", display: "table", height: "70px" }}>
                                     <p style={{ display: "table-cell", verticalAlign: "middle" }}>{item.penalty}</p>

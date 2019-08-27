@@ -8,9 +8,10 @@ class Search extends Component {
         this.props.setSearch(this.props.book)
 
     }
-    componentDidMount = async () => {
+    componentDidMount = async() => {
         await this.props.dispatch(getBooks(""))
         this.props.setSearch(this.props.book)
+        
     }
     render() {
         return (

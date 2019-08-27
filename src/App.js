@@ -3,9 +3,7 @@ import './App.css'
 import Nav from './screen/Navbar'
 import Search from './screen/search'
 import List from './screen/list'
-import Data from './data'
 import Pinjam from './screen/pinjam'
-import SearchList from './screen/searchList'
 import BookDetail from './screen/BookDetail'
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Modal from './screen/Modal'
@@ -22,7 +20,7 @@ import Users from './screen/users';
 class App extends Component {
   constructor() {
     super()
-    this.state = { Data, show: false, idPinjam: 0, modalPinjam: false, modalKembalikan: false, modalDelete: false, search: [], searching: false }
+    this.state = { show: false, idPinjam: 0, modalPinjam: false, modalKembalikan: false, modalDelete: false, search: [] }
   }
   showModal = () => {
     this.setState({ show: true })
@@ -49,7 +47,7 @@ class App extends Component {
     this.setState({ modalKembalikan: false })
   }
   setSearch = (search) => {
-    this.setState({ search: search, searching: true })
+    this.setState({ search: search })
   }
   render() {
     return (
@@ -58,9 +56,12 @@ class App extends Component {
           <Router>
             <Switch>
               <Route exact path={"/"}>
+                {
+                  console.log(this.state.search)
+                }
                 <Route component={Nav} />
                 <Route render={() => <Search setSearch={this.setSearch} />} />
-                <Route render={() => <List showModal={this.showModal} />} />
+                <Route render={() => <List showModal={this.showModal} setSearch={this.setSearch} search={this.state.search} />} />
                 <Route render={() => <Modal show={this.state.show} handleClose={this.hideModal} />} />
               </Route>
               <Route path={"/pinjam"}>

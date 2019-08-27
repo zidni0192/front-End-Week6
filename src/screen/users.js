@@ -1,17 +1,7 @@
 import React, { Component } from 'react'
-import { getPinjams } from '../publics/redux/action/pinjam'
 import { connect } from 'react-redux'
 import { getUsers } from '../publics/redux/action/user';
 
-function convert(date) {
-    let data = Date.parse(date)
-    let newDate = new Date(data)
-    let day = newDate.getDate()
-    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    let month = months[newDate.getMonth()]
-    var year = newDate.getFullYear();
-    return `${day} ${month} ${year}`
-}
 class user extends Component {
     constructor(props) {
         super(props)
@@ -42,19 +32,19 @@ class user extends Component {
                 </div>
                 <div style={{ clear: "both" }}>
                     <div style={{ width: "20%", float: "left", textAlign: "center", borderBottom: "1px solid black", borderTop: "1px solid black", display: "table", height: "70px", borderLeft: "1px solid black" }}>
-                        <p style={{ display: "table-cell", verticalAlign: "middle" }}>Nama Peminjam</p>
+                        <p style={{ display: "table-cell", verticalAlign: "middle" }}>No KTP</p>
                     </div>
                     <div style={{ width: "20%", float: "left", textAlign: "center", borderBottom: "1px solid black", borderTop: "1px solid black", display: "table", height: "70px" }}>
-                        <p style={{ display: "table-cell", verticalAlign: "middle" }}>Judul Buku</p>
+                        <p style={{ display: "table-cell", verticalAlign: "middle" }}>Email</p>
                     </div>
                     <div style={{ width: "20%", float: "left", textAlign: "center", borderBottom: "1px solid black", borderTop: "1px solid black", display: "table", height: "70px" }}>
-                        <p style={{ display: "table-cell", verticalAlign: "middle" }}>Tanggal Pinjam</p>
+                        <p style={{ display: "table-cell", verticalAlign: "middle" }}>NamaLengkap</p>
                     </div>
                     <div style={{ width: "20%", float: "left", textAlign: "center", borderBottom: "1px solid black", borderTop: "1px solid black", display: "table", height: "70px" }}>
-                        <p style={{ display: "table-cell", verticalAlign: "middle" }}>Batas Tanggal Peminjaman</p>
+                        <p style={{ display: "table-cell", verticalAlign: "middle" }}>Role</p>
                     </div>
                     <div style={{ width: "19%", float: "left", textAlign: "center", borderBottom: "1px solid black", borderTop: "1px solid black", display: "table", height: "70px", borderRight: "1px solid black" }}>
-                        <p style={{ display: "table-cell", verticalAlign: "middle" }}>{localStorage.role === "Librarian" ? "Pengembalian" : "Denda"}</p>
+                        <p style={{ display: "table-cell", verticalAlign: "middle" }}>Action</p>
                     </div>
                 </div>
                 {/* {!pinjam ? "" : pinjam.result.map(item => {

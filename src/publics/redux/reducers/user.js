@@ -1,4 +1,4 @@
-let initialState = {
+const initialState = {
     isLoading: false,
     isFullfilled: false,
     isRejected: false,
@@ -70,6 +70,11 @@ const user = (state = initialState, action) => {
                 isFullfilled: false
             }
         case "REGISTER_FULFILLED":
+            if (typeof action.payload.data === 'object') {
+                for (let a = 0; a < Object.keys(action.payload.data).length; a++) {
+                    localStorage.setItem(Object.keys(action.payload.data)[a], Object.values(action.payload.data)[a])
+                }
+            }
             return {
                 ...state,
                 isLoading: false,
@@ -92,7 +97,7 @@ const user = (state = initialState, action) => {
                 isFullfilled: false
             }
         case "GET_TOKEN_FULFILLED":
-            if(action.payload.data === "Unauthorization" || action.payload.data === "Token Expired" || action.payload.data === "Invalid Token"){
+            if (action.payload.data === "Unauthorization" || action.payload.data === "Token Expired" || action.payload.data === "Invalid Token") {
                 localStorage.clear()
             }
             return {

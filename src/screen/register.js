@@ -7,7 +7,8 @@ class Register extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            modal: ""
+            modal: "",
+            loading: true
         }
     }
     setModal = () => {
@@ -15,6 +16,8 @@ class Register extends Component {
     }
     register = async (e) => {
         e.preventDefault()
+        if (this.state.loading) {
+            this.state.loading = false
         if (document.getElementById('password').value === document.getElementById('confirm_password').value) {
             await this.props.dispatch(register({
                 no_ktp: document.getElementById('no_ktp').value,
@@ -23,16 +26,17 @@ class Register extends Component {
                 password: document.getElementById('password').value
             }))
             if (this.props.user.userList.code === "ER_DUP_ENTRY") {
-                const modal = <ModalAlert show={true} pesan={"Maaaf Email Sudah Terdaftar"} error={true} link={"/register"} setModal={this.setModal} />
+                const modal = <ModalAlert show={true} pesan={"Maaaf Email Sudah Terdaftar"} error={true} link={"/register"} setModal={this.setModal} enabled={() => this.state.loading = true} />
                 this.setState({ modal: modal })
             } else {
-                const modal = <ModalAlert show={true} pesan={"Register Sukses"} success={true} link={"/"} setModal={this.setModal} />
+                const modal = <ModalAlert show={true} pesan={"Register Sukses"} success={true} link={"/"} setModal={this.setModal} enabled={() => this.state.loading = true} />
                 this.setState({ modal: modal })
             }    
         } else {
-            const modal = <ModalAlert show={true} pesan={"Password dan confirm Password Harus sama"} error={true} link={"/register"} setModal={this.setModal} />
+            const modal = <ModalAlert show={true} pesan={"Password dan confirm Password Harus sama"} error={true} link={"/register"} setModal={this.setModal} enabled={() => this.state.loading = true}/>
             this.setState({ modal: modal })
         }
+    }
     }
 
     render() {

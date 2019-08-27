@@ -7,6 +7,7 @@ function ModalAlert(props) {
     const close = ()=>{
         setShow(false)
         props.setModal()
+        props.enabled()
     }
     return (
         <div className={show ? "modal display-block" : "modal display-none"}>

@@ -7,35 +7,41 @@ class Nav extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            modal: ""
+            modal: "",
+            loading: true
         }
     }
-    setModal = ()=>{
-        this.setState({modal:""})
+    setModal = () => {
+        this.setState({ modal: "" })
     }
     componentDidMount = () => {
         this.props.dispatch(getToken(localStorage.getItem('token'), localStorage.getItem('id')))
     }
     destroy = () => {
-        const modal = <ModalAlert show={true} pesan={"Logout Sukses"} success={true} link={"/"} setModal={this.setModal} />
-        this.setState({ modal: modal })
-        localStorage.clear()
+        if (this.state.loading) {
+            // eslint-disable-next-line
+            this.state.loading = false
+            // eslint-disable-next-line
+            const modal = <ModalAlert show={true} pesan={"Logout Sukses"} success={true} link={"/"} setModal={this.setModal} enabled={() => this.state.loading = true} />
+            this.setState({ modal: modal })
+            localStorage.clear()
+        }
     }
     render() {
         const dropdown =
             <ul className={'dropdown'} style={{ float: "right", margin: 0, listStyleType: "none", padding: 0, marginRight: "40px" }}>
                 <li><p style={{ margin: 0, padding: "5px 10px 20px 10px", fontSize: "14pt", marginBottom: "-3px", float: "right", zIndex: 10, cursor: "pointer", background: "white" }}>{localStorage.fullname}</p>
-                    <ul style={{ margin: 0, padding: 0, overflow: "hidden", padding: "20px 10px 10px 20px", listStyleType: "none", background: "white", textAlign: "left", width: 100, borderRadius: "10px", boxShadow: "1px 1px 3px #ddd", clear: "both" }}>
+                    <ul style={{ margin: 0, overflow: "hidden", padding: "20px 10px 10px 20px", listStyleType: "none", background: "white", textAlign: "left", width: 100, borderRadius: "10px", boxShadow: "1px 1px 3px #ddd", clear: "both" }}>
                         <Link to={"/pinjam"}><li style={{ padding: "5px 10px" }}>History</li></Link>
                         <Link to={"/"}><li style={{ padding: "5px 10px" }}>Profile</li></Link>
-                        {localStorage.role === "Librarian"?<Link to={"/users"}><li style={{ padding: "5px 10px" }}>Users</li></Link>:""}
-                        <li style={{ padding: "5px 10px",cursor:"pointer", }} onClick={this.destroy}>Logout</li>
+                        {localStorage.role === "Librarian" ? <Link to={"/users"}><li style={{ padding: "5px 10px" }}>Users</li></Link> : ""}
+                        <li style={{ padding: "5px 10px", cursor: "pointer", }} onClick={this.destroy}>Logout</li>
                     </ul>
                 </li>
             </ul>
         return (
             <div>
-            {this.state.modal}
+                {this.state.modal}
                 <div id="header">
                     <span><Link to="/" style={{ textDecoration: 'none', color: "black" }}>BOOKS</Link></span>
                     <div style={{ float: "right" }}>

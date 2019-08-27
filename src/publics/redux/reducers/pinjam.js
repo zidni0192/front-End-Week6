@@ -80,8 +80,7 @@ const book = (state = intialState, action) => {
                 isRejected: true,
             }
         case 'PATCH_PINJAM_FULFILLED':
-            console.log(action.payload.data.result)
-            if (action.payload.data.result.returned_at !== null) {
+            if (action.payload.data.result && action.payload.data.result.returned_at ) {
                 const find = state.pinjamList.result.find(item => Number(item.id) === Number(action.payload.data.result[0].id))
                 state.pinjamList.result[state.pinjamList.result.indexOf(find)] = action.payload.data.result[0]
             }

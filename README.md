@@ -14,7 +14,9 @@
 - [License](#license)
 
 ## Introduction
-Simple Book Management.
+Simple Book Management to make online book loan transactions based on Web. There are several books with famous authors and can read a brief synopsis by looking at the details of the book
+
+The purpose of this application is for people to borrow books online and easily
 
 ## Features
 * Users can Add, Remove Or delete  book
@@ -38,12 +40,6 @@ Simple Book Management.
 2. Type `git clone https://github.com/zidni0192/front-End-Week6`
 3. Open the folder and type `npm install` for install dependencies 
 4. Type `npm start ` for run this app.
-
-
-## Demo
-<div>
-
-</div>
 
 ## Related Project
 <a href ='https://github.com/zidni0192/back-End-Week6'>Back End Book Management</a>
